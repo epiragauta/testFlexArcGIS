@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:esri="http://www.esri.com/2008/ags"
+			   pageTitle="World Street Map">
+	<!--
+	Description:
+	This sample demonstrates how to add an ArcGISTiledMapServiceLayer
+	to your Map using the ArcGIS API for Flex.  The tiled layer is
+	typically used as a basemap layer in the map and its source is
+	a map service that has been cached or has map tiles.
+	This map is the World Street Map service from ArcGIS Online.
+	
+	The sample uses a cached map service from ArcGIS Online.
+	
+	You can browse the ArcGIS.com site for additional online basemap and reference
+	map services or publish your own geographic data as a service using ArcGIS Server.
+	
+	Documentation:
+	For more information, see the API documentation.
+	http://resources.arcgis.com/en/help/flex-api/apiref/com/esri/ags/Map.html
+	http://resources.arcgis.com/en/help/flex-api/apiref/com/esri/ags/SpatialReference.html
+	http://resources.arcgis.com/en/help/flex-api/apiref/com/esri/ags/geometry/Extent.html
+	http://resources.arcgis.com/en/help/flex-api/apiref/com/esri/ags/layers/ArcGISTiledMapServiceLayer.html
+	
+	http://resources.arcgis.com/en/help/flex-api/concepts/index.html#/Types_of_layers/017p00000027000000/
+	
+	ArcGIS REST API documentation:
+	http://resources.arcgis.com/en/help/rest/apiref/mapserver.html
+	http://resources.arcgis.com/en/help/rest/apiref/tile.html
+	
+	ArcGIS for Server documentation:
+	http://resources.arcgis.com/en/help/main/10.1/#/What_is_a_map_service/0154000002m7000000/
+	http://resources.arcgis.com/en/help/main/10.1/#/What_is_map_caching/01540000048q000000/
+	-->
+	
+	<fx:Declarations>
+		<esri:Extent id="initialExtent"
+					 xmin="-8457316.08423718" ymin="458922.44270362845" xmax="-8043333.139044867" ymax="631670.1266280435">
+			<esri:SpatialReference wkid="102100"/>
+		</esri:Extent>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import com.esri.ags.samples.JSONFeatureLayerLocal;
+			
+			import mx.controls.Alert;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+						
+			private var json:JSONFeatureLayerLocal;
+			
+			private var fileReference:FileReference;
+			
+			private function btnLoadFeatureLayerClickHandler(event:MouseEvent){
+												
+				json = new JSONFeatureLayerLocal();
+				json.url = "assets/Red_Troncal_.json";
+				json.map = map;
+				json.fetch();
+								
+			}
+			
+			private function btnClearMapClickHandler(event:MouseEvent){
+				json.clearMap();
+			}
+			
+			private function btnReadXlsClickHandler(event:MouseEvent){
+				
+				var sFile:String = "Example Spreadsheet.xlsx";
+				var xls:LoadXLSXExample = new LoadXLSXExample(sFile);
+				
+			}
+			
+			
+			protected function fileUpload(event:MouseEvent):void
+			{
+				// create a fileFilter - class declaration
+				var fileTypes:FileFilter;
+				// set the file filter type - jpg/png/gif - init method             
+				fileTypes = new FileFilter("Excel File (*.xlsx)", "*.xlsx");
+				
+				fileReference = new FileReference();
+				
+				fileReference.browse([fileTypes]);
+				
+				fileReference.addEventListener(Event.SELECT, browseFile);              
+				fileReference.addEventListener(Event.COMPLETE, uploadFile);                
+			}
+			
+			private function browseFile(event:Event):void {
+				fileReference.load();
+			}
+			private function uploadFile(event:Event):void {
+				//profileImage.source = fileReference.data;
+				
+				var name:String = fileReference.name;
+				var directory:String = "/EClassV1/flex_src/Images";
+				var content:ByteArray = new ByteArray();
+				fileReference.data.readBytes(content, 0, fileReference.data.length);
+				var xls:LoadXLSXByteArrayExample = new LoadXLSXByteArrayExample(content);
+				
+				
+				//var fileAsyn:AsyncToken = userService.uploadImage(name,directory,content);
+				//fileAsyn.addResponder(new mx.rpc.Responder(handler_success, handler_failure)); 
+			}
+			
+		]]>
+	</fx:Script>
+	
+
+	
+	<s:controlBarContent>
+		<s:RichText width="100%">
+			This sample demonstrates how to add an ArcGISTiledMapServiceLayer
+			to your Map using the ArcGIS API for Flex.  The tiled layer is
+			typically used as a basemap layer in the map and its source is
+			a map service that has been cached or has map tiles.
+			This map is the World Street Map service from ArcGIS Online.
+		</s:RichText>
+		<s:Button id="btnLoadFeatureLayer" label="load FeatureLayer" click="btnLoadFeatureLayerClickHandler(event)">						
+		</s:Button>
+		<s:Button id="btnclearMap" label="Clear Map" click="btnClearMapClickHandler(event)"></s:Button>
+		<s:Button id="btnReadXls" label="Read XLS" click="btnReadXlsClickHandler(event)"></s:Button>
+		<s:Button id="btnUploadXls" label="Upload XLS" click="fileUpload(event)"></s:Button>
+	</s:controlBarContent>
+	
+	<esri:Map id="map" extent="{initialExtent}" wrapAround180="true">
+		<esri:ArcGISTiledMapServiceLayer url="http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"/>
+	</esri:Map>
+</s:Application>

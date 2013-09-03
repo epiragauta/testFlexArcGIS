@@ -1,0 +1,117 @@
+{
+ "currentVersion": 10.1,
+ "id": 0,
+ "name": "red_troncal",
+ "type": "Feature Layer",
+ "description": "",
+ "definitionExpression": "",
+ "geometryType": "esriGeometryPolyline",
+ "copyrightText": "",
+ "parentLayer": null,
+ "subLayers": [],
+ "minScale": 0,
+ "maxScale": 0,
+ "drawingInfo": {
+  "renderer": {
+   "type": "simple",
+   "symbol": {
+    "type": "esriSLS",
+    "style": "esriSLSSolid",
+    "color": [
+     0,
+     158,
+     137,
+     255
+    ],
+    "width": 1
+   },
+   "label": "",
+   "description": ""
+  },
+  "transparency": 0,
+  "labelingInfo": null
+ },
+ "defaultVisibility": true,
+ "extent": {
+  "xmin": -74.35242326303381,
+  "ymin": 4.463206340437409,
+  "xmax": -73.8787521103323,
+  "ymax": 5.052044468658551,
+  "spatialReference": {
+   "wkid": 4686,
+   "latestWkid": 4686
+  }
+ },
+ "hasAttachments": false,
+ "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+ "displayField": "COD_DIV",
+ "typeIdField": null,
+ "fields": [
+  {
+   "name": "OBJECTID",
+   "type": "esriFieldTypeOID",
+   "alias": "OBJECTID",
+   "domain": null
+  },
+  {
+   "name": "Shape",
+   "type": "esriFieldTypeGeometry",
+   "alias": "Shape",
+   "domain": null
+  },
+  {
+   "name": "COD_DIV",
+   "type": "esriFieldTypeString",
+   "alias": "COD_DIV",
+   "length": 2,
+   "domain": null
+  },
+  {
+   "name": "DIAMETRO",
+   "type": "esriFieldTypeString",
+   "alias": "DIAMETRO",
+   "length": 6,
+   "domain": null
+  },
+  {
+   "name": "NOMBRE_TRA",
+   "type": "esriFieldTypeString",
+   "alias": "NOMBRE_TRA",
+   "length": 60,
+   "domain": null
+  },
+  {
+   "name": "TJUNCTION",
+   "type": "esriFieldTypeDouble",
+   "alias": "TJUNCTION",
+   "domain": null
+  },
+  {
+   "name": "FJUNCTION",
+   "type": "esriFieldTypeDouble",
+   "alias": "FJUNCTION",
+   "domain": null
+  },
+  {
+   "name": "Shape_Leng",
+   "type": "esriFieldTypeDouble",
+   "alias": "Shape_Leng",
+   "domain": null
+  },
+  {
+   "name": "Shape_Length",
+   "type": "esriFieldTypeDouble",
+   "alias": "Shape_Length",
+   "domain": null
+  }
+ ],
+ "relationships": [],
+ "canModifyLayer": false,
+ "canScaleSymbols": false,
+ "hasLabels": false,
+ "capabilities": "Map,Query,Data",
+ "maxRecordCount": 1000,
+ "supportsStatistics": true,
+ "supportsAdvancedQueries": true,
+ "supportedQueryFormats": "JSON, AMF"
+}
